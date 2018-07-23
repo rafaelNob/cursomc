@@ -1,13 +1,14 @@
 package com.rafa.cursomc.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rafa.cursomc.domain.Categoria;
+import com.rafa.cursomc.services.CategoriaService;
 
 
 //
@@ -15,18 +16,15 @@ import com.rafa.cursomc.domain.Categoria;
 @RequestMapping(value="/categorias")
 public class CategoriaResources {
 	
-	@RequestMapping(method=RequestMethod.GET)
-	public List<Categoria> listar() {
-		Categoria cat1 = new Categoria(1, "inf");
-		Categoria cat2 = new Categoria(1, "escritorio");
-		
-		List<Categoria> lis = new ArrayList<Categoria>();
-		lis.add(cat1);
-		lis.add(cat2);
-		lis.add(cat2);
+	@Autowired
+	private CategoriaService service;
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public ResponseEntity<?>  find(@PathVariable Integer id) {
+		Categoria obj = service.buscar(id);
 		
 		
-		return lis;
+		return ResponseEntity.ok().body(obj);
 	}
 	
 }
