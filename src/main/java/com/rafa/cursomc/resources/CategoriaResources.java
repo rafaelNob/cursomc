@@ -11,7 +11,7 @@ import com.rafa.cursomc.domain.Categoria;
 import com.rafa.cursomc.services.CategoriaService;
 
 
-//
+
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResources {
